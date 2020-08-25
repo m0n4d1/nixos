@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
 
       ./apps/vim/vim.nix
-#       ./apps/tmux.nix
+      ./apps/tmux/tmux.nix
 #       ./apps/zsh/nix
     ];
 
@@ -68,6 +68,7 @@
       wget 
       which
       xorg.xrandr
+      teamviewer
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -121,20 +122,22 @@
         xkbOptions      = "caps:swapescape";
         layout          = "us";
         libinput.enable = true;
-        windowManager.xmonad = {
-          config = builtins.readFile ./services/xmonad/xmonad.hs;
-          enable = true;
-          enableContribAndExtras = true;
-          extraPackages = hpkgs: [           # Open configuration for additional Haskell packages.
-            hpkgs.xmonad-contrib             # Install xmonad-contrib.
-            hpkgs.xmonad-extras              # Install xmonad-extras.
-            hpkgs.xmonad                     # Install xmonad itself.
-            hpkgs.xmonad-wallpaper
-          ];
-        };
-      desktopManager.default      = "none";
-      desktopManager.xterm.enable = false;
-      windowManager.default       = "xmonad";
+        displayManager.sddm.enable = true;
+        desktopManager.plasma5.enable = true;
+      #  windowManager.xmonad = {
+      #    config = builtins.readFile ./services/xmonad/xmonad.hs;
+      #    enable = true;
+      #    enableContribAndExtras = true;
+      #    extraPackages = hpkgs: [           # Open configuration for additional Haskell packages.
+      #      hpkgs.xmonad-contrib             # Install xmonad-contrib.
+      #      hpkgs.xmonad-extras              # Install xmonad-extras.
+      #      hpkgs.xmonad                     # Install xmonad itself.
+      #      hpkgs.xmonad-wallpaper
+      #    ];
+      #  };
+      #desktopManager.default      = "none";
+      #desktopManager.xterm.enable = false;
+      #windowManager.default       = "xmonad";
     };
   };
 
